@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="深入原理,">
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="以前我没得选，现在我选择当个程序员">
-<meta property="og:type" content="website">
-<meta property="og:title" content="前端小站">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="这三个其实都是用来请求数据的，那他们的区别在哪里呢？其实 axios 和 ajax都是对XMLHttpRequest这个对象的封装；而fetch则是window下的一个方法，是一个更底层的方法。  ajax其实重点就是首先实例一个XMLHttpRequest对象，用其中的open方法建立连接；send方法传输数据（前端传到后台）；然后再利用onreadystatechange 监听readySta">
+<meta name="keywords" content="深入原理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="axios和ajax及fetch原理浅析">
+<meta property="og:url" content="http://yoursite.com/2019/05/08/axios和ajax及fetch原理浅析/index.html">
 <meta property="og:site_name" content="前端小站">
-<meta property="og:description" content="以前我没得选，现在我选择当个程序员">
+<meta property="og:description" content="这三个其实都是用来请求数据的，那他们的区别在哪里呢？其实 axios 和 ajax都是对XMLHttpRequest这个对象的封装；而fetch则是window下的一个方法，是一个更底层的方法。  ajax其实重点就是首先实例一个XMLHttpRequest对象，用其中的open方法建立连接；send方法传输数据（前端传到后台）；然后再利用onreadystatechange 监听readySta">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-05-09T11:12:55.274Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="前端小站">
-<meta name="twitter:description" content="以前我没得选，现在我选择当个程序员">
+<meta name="twitter:title" content="axios和ajax及fetch原理浅析">
+<meta name="twitter:description" content="这三个其实都是用来请求数据的，那他们的区别在哪里呢？其实 axios 和 ajax都是对XMLHttpRequest这个对象的封装；而fetch则是window下的一个方法，是一个更底层的方法。  ajax其实重点就是首先实例一个XMLHttpRequest对象，用其中的open方法建立连接；send方法传输数据（前端传到后台）；然后再利用onreadystatechange 监听readySta">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/05/08/axios和ajax及fetch原理浅析/">
 
 
 
 
 
-  <title>前端小站</title>
+  <title>axios和ajax及fetch原理浅析 | 前端小站</title>
   
 
 
@@ -143,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -277,156 +278,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/09/移动端开发兼容性问题/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="wendell">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/croppedImage_cropped.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="前端小站">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/09/移动端开发兼容性问题/" itemprop="url">移动端开发兼容性问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-05-09T18:56:05+08:00">
-                2019-05-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2019/05/09/移动端开发兼容性问题/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/05/09/移动端开发兼容性问题/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p> <strong>移动端开发会让你经常会和测试说这样一些话：“我已经测了的，怎么会是这个样子？”；“我的手机上是正常的呀！”；“会不会是缓存~”；“还有这种操作？？？”……</strong></p>
-<blockquote>
-<p>刚开始不如移动端开发，这个时候才发现设备的兼容性是多么让人头疼，下面会记录一些我遇到的问题。这篇文章会持续不定期更新</p>
-</blockquote>
-<blockquote>
-<p>我讲的不会很细致，只会讲出我遇到的问题和解决的思路及少量代码</p>
-</blockquote>
-<h5 id="ios使用fixed蒙层输入框"><a href="#ios使用fixed蒙层输入框" class="headerlink" title="ios使用fixed蒙层输入框"></a>ios使用fixed蒙层输入框</h5><p>你会惊奇的发现，如果你在有弹框的蒙层用了fixed这种常规操作，很棒~，简单实用。but！ios会出现输入框闪烁的无奈问题，也不用纠结哪个版本的ios了，反正你都得改~。具体我们该怎么解决这个问题呢？用absolute？真好，我们想到了一起。但是要知道absolute并不能锁定整个屏幕，所以我给body设置<code>overflow:hidden</code>，但是这会导致body自动到顶部。实在没想出完美解决这个bug的简单用css就可以的方法。所以我用了js控制。主要是使用了两个函数，</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// 我用的是vue</span><br><span class="line">// 思路很简单  就是弹框弹起时获取scrollTop 和 屏幕的高度</span><br><span class="line">// 然后 两者相加为背景高度使用margin-top的负高度上移scrollTop的高度，</span><br><span class="line">// 最后overflow:hidden;</span><br><span class="line">// 关闭弹框时恢复设置</span><br><span class="line">hasMask() &#123;</span><br><span class="line">          this.top = document.documentElement.scrollTop || document.body.scrollTop;</span><br><span class="line">         	const mainDom = document.querySelector(&apos;.pig-main&apos;);</span><br><span class="line">          this.pageMinHeight = document.querySelector(&apos;#app&apos;).clientHeight;</span><br><span class="line">          mainDom.style.marginTop = -this.top + &apos;px&apos;;</span><br><span class="line">          mainDom.style.height = this.pageMinHeight + this.top - 1 + &apos;px&apos;;</span><br><span class="line">          mainDom.style.overflow = &apos;hidden&apos;;</span><br><span class="line">         </span><br><span class="line">      &#125;,</span><br><span class="line">      noMask() &#123;</span><br><span class="line">          const mainDom = document.querySelector(&apos;.pig-main&apos;);</span><br><span class="line">          mainDom.style.marginTop = 0;</span><br><span class="line">          mainDom.style.height = &apos;&apos;;</span><br><span class="line">          mainDom.style.overflow = &apos;&apos;;</span><br><span class="line">          document.documentElement.scrollTop = this.top;</span><br><span class="line">          document.body.scrollTop = this.top;</span><br><span class="line">          </span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-<p>然而这种方式在ios下也有一个bug，ios的title处会动态的小幅度变化，导致蒙层可滑动并且下方会有小部分空白。此时我选择监听scroll事件，动态改变高度。（ps: 弹框关闭时建议移除scroll事件）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">changeHeight() &#123;</span><br><span class="line">          const mainDom = document.querySelector(&apos;.pig-main&apos;);</span><br><span class="line">          this.pageMinHeight = document.querySelector(&apos;#app&apos;).clientHeight;</span><br><span class="line">          mainDom.style.marginTop = -this.top + &apos;px&apos;;</span><br><span class="line">          mainDom.style.height = this.pageMinHeight + this.top - 1 + &apos;px&apos;;</span><br><span class="line">          mainDom.style.overflow = &apos;hidden&apos;;</span><br><span class="line">      &#125;,</span><br><span class="line">      hasMask() &#123;</span><br><span class="line">          this.top = document.documentElement.scrollTop || document.body.scrollTop;</span><br><span class="line">          this.changeHeight();</span><br><span class="line">          window.addEventListener(&apos;scroll&apos;, this.changeHeight)</span><br><span class="line">      &#125;,</span><br><span class="line">      noMask() &#123;</span><br><span class="line">          const mainDom = document.querySelector(&apos;.pig-main&apos;);</span><br><span class="line">          window.removeEventListener(&apos;scroll&apos;, this.changeHeight)</span><br><span class="line">          mainDom.style.marginTop = 0;</span><br><span class="line">          mainDom.style.height = &apos;&apos;;</span><br><span class="line">          mainDom.style.overflow = &apos;&apos;;</span><br><span class="line">          document.documentElement.scrollTop = this.top;</span><br><span class="line">          document.body.scrollTop = this.top; </span><br><span class="line">      &#125;,</span><br></pre></td></tr></table></figure>
-<blockquote>
-<p>这个bug目前算是解决了，代码写的不好还见谅，我也会努力向大家学习。大家有更好的方法也可以推荐给我。</p>
-</blockquote>
-<h5 id="目前ios12及以上版本input框换起软盘后收起，页面没有恢复"><a href="#目前ios12及以上版本input框换起软盘后收起，页面没有恢复" class="headerlink" title="目前ios12及以上版本input框换起软盘后收起，页面没有恢复"></a>目前ios12及以上版本input框换起软盘后收起，页面没有恢复</h5><p>这个bug解决的思路很简单：首先，未恢复的页面在发生scroll事件时就会恢复；接下来就是解决何时发生滚动，我采用的是在blur时scrollTo;最开始如果我们scrollTo(0, 0),就会出现一个新的bug就是你每切换一个输入框都会往上弹一下，用户体验会很差；所以就在blur时计算此时的scrollTop值；然后加1px。:)最后因为ios切换输入框滚动有个延时，所以最后代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">if (/os 12/ig.test(navigator.userAgent)) &#123;</span><br><span class="line">          window.addEventListener(&apos;blur&apos;, () =&gt; &#123;</span><br><span class="line">              let currentTop;</span><br><span class="line">              setTimeout(() =&gt; &#123;</span><br><span class="line">				currentTop = document.documentElement.scrollTop || document.body.scrollTop;</span><br><span class="line">                  currentTop += 1; </span><br><span class="line">                  window.scrollTo(0,currentTop);</span><br><span class="line">		&#125;,300);</span><br><span class="line">          &#125;,true)</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
-<h5 id="手机锁屏倒计时停止"><a href="#手机锁屏倒计时停止" class="headerlink" title="手机锁屏倒计时停止"></a>手机锁屏倒计时停止</h5><p>手机锁屏的解决方案如果不是webview的页面，用网上的监听页面事件的解决方案是不好解决的，get到一个简单方法就是在setinterval里获取当前时间，如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">const timer = setInterval(function () &#123;</span><br><span class="line">     timeleft = parseInt((finishTime - new Date().getTime()) / 1000)  // 重复获取时间</span><br><span class="line">       min = Math.floor(timeleft / 60);</span><br><span class="line">       sec = Math.floor(timeleft % 60);</span><br><span class="line"></span><br><span class="line">       min = min &lt; 10 ? &quot;0&quot; + min : min;</span><br><span class="line">       sec = sec &lt; 10 ? &quot;0&quot; + sec : sec;</span><br><span class="line">       self.timeLeftShow = `$&#123;min&#125;:$&#123;sec&#125;`;</span><br><span class="line">       timeleft--;</span><br><span class="line">       if (timeleft &lt;= 0) &#123;</span><br><span class="line">           self.canPay = false;</span><br><span class="line">           clearInterval(timer);</span><br><span class="line">       &#125;</span><br><span class="line">  &#125;, 1000);</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -456,9 +310,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2019/05/08/axios和ajax及fetch原理浅析/" itemprop="url">axios和ajax及fetch原理浅析</a></h1>
+          <h1 class="post-title" itemprop="name headline">axios和ajax及fetch原理浅析</h1>
         
 
         <div class="post-meta">
@@ -540,9 +392,7 @@
       
 
       
-        
-          
-            <p>这三个其实都是用来请求数据的，那他们的区别在哪里呢？其实 <code>axios</code> 和 <code>ajax</code><br>都是对XMLHttpRequest这个对象的封装；而fetch则是window下的一个方法，是一个更底层的方法。</p>
+        <p>这三个其实都是用来请求数据的，那他们的区别在哪里呢？其实 <code>axios</code> 和 <code>ajax</code><br>都是对XMLHttpRequest这个对象的封装；而fetch则是window下的一个方法，是一个更底层的方法。</p>
 <hr>
 <h2 id="ajax"><a href="#ajax" class="headerlink" title="ajax"></a>ajax</h2><p><strong>其实重点就是首先实例一个XMLHttpRequest对象，用其中的<code>open</code>方法建立连接；<code>send</code>方法传输数据（前端传到后台）；然后再利用<code>onreadystatechange</code> 监听readyState的变化，当其为<code>4</code>时，代表请求完成；简单的代码实现如下：</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">const Ajax=&#123;</span><br><span class="line">  get: function(url, fn) &#123;</span><br><span class="line">    // XMLHttpRequest对象用于在后台与服务器交换数据   </span><br><span class="line">    var xhr = new XMLHttpRequest();            </span><br><span class="line">    xhr.open(&apos;GET&apos;, url, true);</span><br><span class="line">    xhr.onreadystatechange = function() &#123;</span><br><span class="line">      // readyState 为4说明请求已完成</span><br><span class="line">      if (xhr.readyState == 4 &amp;&amp; xhr.status == 200) &#123; </span><br><span class="line">        // 从服务器获得数据 </span><br><span class="line">        fn.call(this, xhr.responseText);  </span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    xhr.send();</span><br><span class="line">  &#125;,</span><br><span class="line">  // datat应为&apos;a=a1&amp;b=b1&apos;这种字符串格式，在jq里如果data为对象会自动将对象转成这种字符串格式</span><br><span class="line">  post: function (url, data, fn) &#123;</span><br><span class="line">    var xhr = new XMLHttpRequest();</span><br><span class="line">    xhr.open(&quot;POST&quot;, url, true);</span><br><span class="line">    // 添加http头，发送信息至服务器时内容编码类型</span><br><span class="line">    xhr.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);  </span><br><span class="line">    xhr.onreadystatechange = function() &#123;</span><br><span class="line">      if (xhr.readyState == 4 &amp;&amp; (xhr.status == 200)) &#123;</span><br><span class="line">        fn.call(this, xhr.responseText);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    xhr.send(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -554,8 +404,6 @@
 <li><strong>fetch和xhr的不同</strong><br> fetch虽然底层，但是还是缺少一些常用xhr有的方法，比如能够取消请求（abort）方法<br>fetch在服务器返回4xx、5xx时是不会抛出错误的，这里需要手动通过，通过response中的ok字段和status字段来判断</li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -570,14 +418,36 @@
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/深入原理/" rel="tag"># 深入原理</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/05/09/移动端开发兼容性问题/" rel="prev" title="移动端开发兼容性问题">
+                移动端开发兼容性问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -587,10 +457,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -598,6 +469,20 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -618,8 +503,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -697,6 +591,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ajax"><span class="nav-number">1.</span> <span class="nav-text">ajax</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#axios"><span class="nav-number">2.</span> <span class="nav-text">axios</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#fetch"><span class="nav-number">3.</span> <span class="nav-text">fetch</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -831,6 +741,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -848,6 +762,18 @@
       <script id="dsq-count-scr" src="https://disqus_T690rWq81F.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/05/08/axios和ajax及fetch原理浅析/';
+          this.page.identifier = '2019/05/08/axios和ajax及fetch原理浅析/';
+          this.page.title = 'axios和ajax及fetch原理浅析';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://disqus_T690rWq81F.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
